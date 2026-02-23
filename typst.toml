@@ -1,0 +1,7 @@
+[package]
+name = "systeq"
+version = "0.1.0"
+entrypoint = "lib.typ"
+categories = [ ]
+disciplines = [ ]
+description = "displaying system of equations"
