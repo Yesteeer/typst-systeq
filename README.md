@@ -1,6 +1,6 @@
 # systeq
 
-systeq is a Typst package for formatting system of equations. Take a look at the [manual](https://github.com/Yesteeer/typst-systeq/docs/manual.pdf) for more examples.
+systeq is a Typst package for formatting system of equations. Take a look at the [manual](https://github.com/Yesteeer/typst-systeq/blob/master/docs/manual.pdf?raw=true) for more examples.
 
 ## Quickstart
 Simply download the package locally (as described on the [Typst Packages](https://github.com/typst/packages)) repository. Then import and use systeq. 
@@ -10,14 +10,18 @@ Simply download the package locally (as described on the [Typst Packages](https:
 ```
 
 ## Functions
-systeq comes with two functions: `systeq` and `render-systeq`. The former defines one system of equations, while the latter renders one of multiple systems.
+systeq comes with two functions: `systeq` and `render-systeq`. The former defines one system of equations, while the latter renders one or multiple systems. You always need to render a system.
 
 ## Syntax
 
 We can render a simple system (like `math.cases`) which is `inline` by default.
 ```typst
-  This is a simple 2x2 linear system: 
-  #render-systeq(systeq($5x - 4y = 8$, $2x + 5y = 1$))
+#import "@local/systeq:0.1.0": *
+
+#set page(height: auto, margin: 1cm)
+
+This is a simple 2x2 linear system: 
+#render-systeq(systeq($5x - 4y = 8$, $2x + 5y = 1$))
 ```
 
 ![image](./examples/inline-example.png)
@@ -27,12 +31,14 @@ Simply put it between \$ ... \$ to make it into a `block`.
 The function `sys` represents a system, which needs to be rendered via `render-sys`. Multiple systems can be rendered at once and will be rendered in a `grid` with default symbol `sep-symbol: $<==>$` and default column number `columns: 4` (counting separators).
 
 ```typst
-  #render-systeq(
-      systeq($5x - 4y = 8$, $2x + 5y = 1$),
-      systeq($-10x + 8y = -16$, $10x + 25y = 5$),
-      systeq($2x + 5y = 1$, $"" "" 33y = -11$),
-      systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+[...]
+
+#render-systeq(
+    systeq($5x - 4y = 8$, $2x + 5y = 1$),
+    systeq($-10x + 8y = -16$, $10x + 25y = 5$),
+    systeq($2x + 5y = 1$, $"" "" 33y = -11$),
+    systeq($2x + 5y = 1$, $"" "" y = -1/3$),
+)
 ```
 ![image](./examples/multiple-example.png)
 
@@ -42,25 +48,29 @@ Usual alignment operator `&` cannot be used in `sys`. You should use spaces to c
 
 Alignments can be customized at different levels. First we can change the alignment inside the grid (default: `align: horizon`).
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     align: center + horizon,
     systeq($5x - 4y = 8$, $2x + 5y = 1$),
     systeq($-10x + 8y = -16$, $10x + 25y = 5$),
     systeq($2x + 5y = 1$, $"" "" 33y = -11$),
     systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+)
 ```
 ![image](./examples/grid-align-example.png)
 
 You can also change the alignment inside the systems (default: `align: right`).
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     sys-align: left,
     systeq($5x - 4y = 8$, $2x + 5y = 1$),
     systeq($-10x + 8y = -16$, $10x + 25y = 5$),
     systeq($2x + 5y = 1$, $"" "" 33y = -11$),
     systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+)
 ```
 ![image](./examples/sys-align-example.png)
 
@@ -68,25 +78,29 @@ You can also change the alignment inside the systems (default: `align: right`).
 
 You can customize the grid gutters with defaults `column-gutter: 2em` and `row-gutter: 2em`.
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     column-gutter: 4em,
     systeq($5x - 4y = 8$, $2x + 5y = 1$),
     systeq($-10x + 8y = -16$, $10x + 25y = 5$),
     systeq($2x + 5y = 1$, $"" "" 33y = -11$),
     systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+)
 ```
 ![image](./examples/grid-spacing-example.png)
 
 You can customize the spacing inside the system with defaults `sys-col-gap: .4em` and `sys-row-gap: .4em`.
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     sys-col-gap: 1em,
     systeq($5x - 4y = 8$, $2x + 5y = 1$),
     systeq($-10x + 8y = -16$, $10x + 25y = 5$),
     systeq($2x + 5y = 1$, $"" "" 33y = -11$),
     systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+)
 ```
 ![image](./examples/sys-spacing-example.png)
 
@@ -96,7 +110,9 @@ You can annotate each equation of a system using the `annot` parameter of `sys`.
 
 The annotation color, size, offset and bar stroke can be changed with following defaults `annot-color: red`, `annot-size: 1em`, `annot-spacing: (left: 1em, right: .2em)` and `annot-bar: (paint: annot-color, thickness: .8pt, dash: "solid")`. The latter accepts any stroke as argument and the `annot-bar` is removed when set to `none`. Each of these parameters can be passed to `render-sys` to be applied to every underlying system and can individually be overridden by passing them to `sys`.
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     annot-color: blue.darken(10%),
     annot-size: .9em,
     annot-spacing: (left: 2em, right: 0em),
@@ -105,7 +121,7 @@ The annotation color, size, offset and bar stroke can be changed with following 
     systeq($-10x + 8y = -16$, $10x + 25y = 5$),
     systeq($2x + 5y = 1$, $"" "" 33y = -11$, annot: ("",$div 33$), annot-bar: purple),
     systeq($2x + 5y = 1$, $"" "" y = -1/3$),
-  )
+)
 ```
 
 ![image](./examples/annot-example.png)
@@ -114,11 +130,13 @@ The annotation color, size, offset and bar stroke can be changed with following 
 
 One last feature of the _systeq_ package is to display addition or substraction operations between equations of one system. This can be used by changing the systems `mode` with default `mode: "normal"` to `mode: "add"` or `mode: "sub"`. This uses the last `sys` entry as result of the addition / substraction and adds a $+$ or $-$ sign on the bottom left. In this case, it is not possible to annotate the system and the `annot-bar` style is applied to the horizontal bar. The result and sign colors and size are inherited from `annot-color` and `annot-size`.
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     align: top,
     systeq($5x - 4y = 8$, $2x + 5y = 1$, annot: ($dot (-2)$, $dot 5$)),
     systeq($-10x + 8y = -16$, $10x + 25y = 5$, $"" "" 33y = -11$, mode: "add", annot-color: blue)
-  )
+)
 ```
 ![image](./examples/addition-example.png)
 
@@ -127,16 +145,18 @@ One last feature of the _systeq_ package is to display addition or substraction 
 In `"normal"` mode, you can choose whether your math content is sized with display or not. This makes sense for example when fraction arise in your equations. For `"add"` and `"sub"` mode there is no display option. The default for normal mode is `display: true`. This parameter can be passed to `render-sys` or `sys`, the latter overriding the former.
 
 ```typst
-  #render-systeq(
+[...]
+
+#render-systeq(
     display: true, // default
     systeq($"" "" y = x + 1$, $(x + 1) / 3 - y / 6 = 1$),
     systeq($"" "" y = x + 1$, $(x + 1) / 3 - (x+1) / 6 = 1$, display: false)
-  ) \
-  #render-systeq(
+    ) \
+    #render-systeq(
     display: false,
     systeq($"" "" y = x + 1$, $(x + 1) / 3 - y / 6 = 1$),
     systeq($"" "" y = x + 1$, $(x + 1) / 3 - (x+1) / 6 = 1$)
-  )
+)
 ```
 
 ![image](./examples/display-example.png)
@@ -144,7 +164,9 @@ In `"normal"` mode, you can choose whether your math content is sized with displ
 ## Complete example (3x3 system)
 
 ```typst
-  $ #render-systeq(
+[...]
+
+$ #render-systeq(
     annot-color: red.darken(20%),
     annot-size: 10pt,
     row-gutter: 2.5em,
@@ -169,7 +191,7 @@ In `"normal"` mode, you can choose whether your math content is sized with displ
     systeq($4x "" "" + 3z = 14$, $x "" "" "" "" = 5$, $"" "" y "" "" = 4$, annot: ($x -> 5$,)),
     systeq($"" "" "" "" 3z = -6$, $x "" "" "" "" = 5$, $"" "" y "" "" = 4$),
     systeq($z = -2$, $x = 5$, $y = 4$),
-  ) $
+) $
 ```
 
 ![image](./examples/3x3-example.png)
