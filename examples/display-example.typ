@@ -1,5 +1,7 @@
 #import "../lib.typ": *
 
+#set page(height: auto, margin: 1cm)
+
 #render-systeq(
   display: true, // default
   systeq($x + 1 = y$, $(x + 1) / 3 - y / 6 = 1$),

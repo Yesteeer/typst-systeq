@@ -1,5 +1,7 @@
 #import "../lib.typ": *
 
+#set page(height: auto, margin: 1cm)
+
 #render-systeq(
   align: center + horizon,
   systeq($5x - 4y = 8$, $2x + 5y = 1$),

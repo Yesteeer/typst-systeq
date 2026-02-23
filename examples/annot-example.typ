@@ -1,5 +1,7 @@
 #import "../lib.typ":  *
 
+#set page(height: auto, margin: 1cm)
+
 #render-systeq(
   annot-color: blue.darken(10%),
   annot-size: .9em,

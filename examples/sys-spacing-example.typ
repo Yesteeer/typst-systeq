@@ -1,5 +1,7 @@
 #import "../lib.typ": *
 
+#set page(height: auto, margin: 1cm)
+
 #render-systeq(
   sys-col-gap: .8em,
   sys-row-gap: .8em,
