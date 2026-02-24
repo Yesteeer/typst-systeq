@@ -383,6 +383,5 @@ In `"normal"` mode, you can choose whether your math content is sized with displ
     systeq($x "" "" "" ""  = 5$, $"" "" "" "" z = -2$, $30 - y + 2z = 22$, annot: ("","",$z = -2$)),
     systeq($x "" "" "" ""  = 5$, $"" "" "" "" z = -2$, $30 - y - 4 = 22$, annot: ("","",$ + thin y - 22$)),
     systeq($x = 5$, $z = -2$, $y = 4$),
-    systeq($x = 5$, $z = -2$, $y = 4$),
   ) $
 )
